@@ -13,6 +13,7 @@
   "author": "Yoeri Otten <yoeori@live.nl>",
   "license": "MIT",
   "dependencies": {
-    "ical-generator": "^0.2.3"
+    "ical-generator": "^0.2.3",
+    "magister.js": "^1.11.0"
   }
 }
