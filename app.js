@@ -11,7 +11,7 @@ new Magister.Magister({ school: 'corderius', username: '133998', password: '***R
     for(i in results) {
       result = results[i];
 
-      if(result.type() == 13) {
+      if(result.type() == 13 && result.status() == 1 && result.absenceInfo() == "undefined") {
         cal.createEvent({
             start: result.begin(),
             end: result.end(),
