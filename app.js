@@ -13,8 +13,8 @@ new Magister.Magister({ school: 'corderius', username: '133998', password: '***R
 
       if(result.type() == 13) {
         cal.createEvent({
-            start: new Date(),
-            end: new Date(new Date().getTime() + 3600000),
+            start: result.begin(),
+            end: result.end(),
             summary: result.classes()[0],
             description: result.description(),
             location: 'Corderius College; ' + result.classRooms()[0],
