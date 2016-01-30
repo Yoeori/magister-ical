@@ -1,33 +1,94 @@
-var ical = require('ical-generator'),
-    http = require('http'),
-    cal = ical({domain: 'test.yoeori.nl', name: 'School Calendar'}),
-    Magister = require("magister.js");
+'use strict';
 
+//dependecies
+var cron = require("cron").CronJob;
+var crypto_json = require('node-cryptojs-aes').JsonFormatter;
+var crypto = require('node-cryptojs-aes').CryptoJS;
 
-new Magister.Magister({ school: 'corderius', username: '133998', password: '***REMOVED***' }).ready(function () {
-  var m = this;
+var User = require('./user');
 
-  m.appointments(new Date(2015, 8, 10), new Date(2015, 10, 30), true, function (error, results) {
-    for(i in results) {
-      result = results[i];
+class App {
 
-      if(result.type() == 13 && result.status() != 4 && typeof result.absenceInfo() == "undefined") {
-        cal.createEvent({
-            start: result.begin(),
-            end: result.end(),
-            summary: result.classes()[0],
-            description: result.description(),
-            location: 'Corderius College; ' + result.classRooms()[0],
-        });
-      }
+  constructor(secrets, data, callback) {
+    var self = this;
 
+    this.secrets = secrets;
+    this.users = [];
+
+    this.addUsersFromData(data.users, callback);
+  }
+
+  addUsersFromData(data, callback) {
+    var self = this;
+    if(data.length == 0) {
+      callback();
+      return;
     }
-  });
+    this.addUserFromData(data[0], function() {
+      data.splice(0,1);
+      self.addUsersFromData(data, callback);
+    });
+  }
 
-});
+  addUserFromData(data, callback) {
+    var self = this;
 
-http.createServer(function(req, res) {
-    cal.serve(res);
-}).listen(3000, '127.0.0.1', function() {
-    console.log('Server running at http://127.0.0.1:3000/');
-});
+    var user = new User(this, data.school, data.username, this.decryptText(data.password), function() {
+      if(!user.hasLoggedIn) {
+        callback(false)
+      } else {
+        self.users.push(user);
+        callback(true);
+      }
+    });
+
+  }
+
+  encryptText(text) {
+    return new Buffer(
+      crypto.AES.encrypt(
+        text, this.secrets.encryption_key,
+        {format: crypto_json}
+      ).toString()
+    ).toString('base64');
+  }
+
+  decryptText(encrypted_text) {
+    return crypto.enc.Utf8.stringify(
+      crypto.AES.decrypt(
+        new Buffer(encrypted_text, 'base64').toString(),
+        this.secrets.encryption_key,
+        {format: crypto_json}
+      )
+    );
+  }
+
+  findUserBySchoolAndUsername(school, username) {
+    for(var i = 0; i < this.users.length; i++) {
+      if(this.users[i].school == school && this.users[i].username == username) {
+        return this.users[i];
+      }
+    }
+    return false;
+  }
+
+  getCalendarFromData(data, callback) {
+    var self = this;
+
+    var user = this.findUserBySchoolAndUsername(data.school, data.username);
+    if(user == false || !user.checkPassword(data.password)) {
+      this.addUserFromData(data, function(succesfull) {
+        if(!succesfull) {
+          callback(false);
+        } else {
+          self.getCalendarFromData(data, callback);
+        }
+      });
+    } else {
+      user.getiCalCalendar(callback);
+    }
+
+  }
+
+}
+module.exports = App;

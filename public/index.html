@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Magister 6 iCal service - yoeori.nl</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <br />
+      <h1>Welcome to the Magister to iCal service!</h1>
+      <p>To use this service please enter your credential below. Your password is secured with AES on our server and only stored when absolutely necessary.</p>
+      <form id="url_form" action="javascript:void(0)" method="post">
+        <fieldset class="form-group">
+          <label for="school">School name</label>
+          <input type="text" class="form-control" id="school" placeholder="corderius">
+          <small class="text-muted">The name of your school. You can find the name of your school in the url of magister like: <b>corderius</b>.magister.net.</small>
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" placeholder="127753">
+          <small class="text-muted">For example your student number.</small>
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;">
+          <small class="text-muted">We will only start storing your password when you are actively using this application. If you change your password you will have to retreive a new url.</small>
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Retreive url</button>
+      </form>
+      <div class="invisible" id="url-box">
+        <br />
+        <p>Your personal iCal url is:</p>
+        <div class="input-group">
+          <input readonly type="text" value="https://school.yoeori.nl/services/calendar/12/43/53" class="form-control" id="url">
+          <span class="input-group-btn">
+            <button class="btn btn-secondary" type="button" id="copy" data-clipboard-target="#url"><i class="fa fa-clipboard"></i></button>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+    <script src="./site.js"></script>
+  </body>
+</html>
