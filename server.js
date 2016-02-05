@@ -4,8 +4,6 @@ var server = express();
 
 var App = require('./app');
 
-console.log(process.env);
-
 var app = new App(require("./secrets"), require("./data"), function() {
 
   var router = express.Router();
