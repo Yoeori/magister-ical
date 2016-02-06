@@ -52,7 +52,9 @@ class User {
         language: 'NL'
     });
 
-    this.magister.appointments(new Date(2016, 0, 20), new Date(2016, 2, 15), true, function (error, results) {
+    var now = new Date().getTime();
+
+    this.magister.appointments(new Date(now - 1000 * 60 * 60 * 24 * 30), new Date(now + 1000 * 60 * 60 * 24 * 30), function (error, results) {
       for(var i in results) {
         var result = results[i];
 
@@ -69,6 +71,7 @@ class User {
       }
       callback(ical);
     });
+
   }
 
 }
