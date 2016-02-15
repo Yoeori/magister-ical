@@ -3,38 +3,41 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Magister 6 iCal service - yoeori.nl</title>
+    <title>Magister 6 iCal service</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   </head>
   <body>
     <div class="container">
       <br />
-      <h1>Welcome to the Magister to iCal service!</h1>
-      <p>To use this service please enter your credential below. Your password is secured with AES on our server and only stored when absolutely necessary.</p>
+      <h1>Welkom bij de Magister Agenda naar iCal service!</h1>
+      <p>Om deze service te gebruiken dien je je inloggegevens hieronder in te vullen. Je wachtwoord is beveiligd met AES beveiliging en wordt nooit opgeslagen.</p>
       <form id="url_form" action="javascript:void(0)" method="post">
+        <div id="error" class="alert alert-danger" style="display: none;" role="alert">
+          <strong>Oeps!</strong> Het lukte ons niet om verbinding te maken met jouw Magister account. Weet je zeker dat je je wachtwoord goed hebt ingevuld? Probeer het anders over een paar minuten nog eens.
+        </div>
         <fieldset class="form-group">
           <label for="school">School name</label>
           <input type="text" class="form-control" id="school" placeholder="corderius">
-          <small class="text-muted">The name of your school. You can find the name of your school in the url of magister like: <b>corderius</b>.magister.net.</small>
+          <small class="text-muted">De naam van je school. Deze kun je vinden in de url van Magister: <b>corderius</b>.magister.net.</small>
         </fieldset>
         <fieldset class="form-group">
           <label for="username">Username</label>
           <input type="text" class="form-control" id="username" placeholder="127753">
-          <small class="text-muted">For example your student number.</small>
+          <small class="text-muted">Bijvoorbeeld je scholierennummer.</small>
         </fieldset>
         <fieldset class="form-group">
           <label for="password">Password</label>
           <input type="password" class="form-control" id="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;">
-          <small class="text-muted">We will only start storing your password when you are actively using this application. If you change your password you will have to retreive a new url.</small>
+          <small class="text-muted">We slaan je wachtwoord alleen in tijdelijk geheugen op. Als je je magister wachtwoord aanpast moet je opnieuw een url aan te vragen.</small>
         </fieldset>
-        <button type="submit" class="btn btn-primary">Retreive url</button>
+        <button type="submit" class="btn btn-primary">Ontvang url</button>
       </form>
       <div class="invisible" id="url-box">
         <br />
-        <p>Your personal iCal url is:</p>
+        <p>Je persoonlijke iCal url is:</p>
         <div class="input-group">
-          <input readonly type="text" value="https://school.yoeori.nl/services/calendar/12/43/53" class="form-control" id="url">
+          <input readonly type="text" value="" class="form-control" id="url">
           <span class="input-group-btn">
             <button class="btn btn-secondary" type="button" id="copy" data-clipboard-target="#url"><i class="fa fa-clipboard"></i></button>
           </span>
