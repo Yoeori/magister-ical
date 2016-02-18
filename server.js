@@ -64,7 +64,7 @@ var app = new App(require("./secrets"), require("./data"), function() {
 
   //start the server
   var listener = server.listen(process.env.NODE_PORT || 3000, function() {
-    console.log('The magister calendar service has started on http://%s:%s%s.', listener.address().address, listener.address().port, process.env.NODE_SUBURL || '');
+    console.log('The magister calendar service has started on http://%s:%s%s.', listener.address().family == 'IPv6' ?  '[' + listener.address().address + ']' : listener.address().address, listener.address().port, process.env.NODE_SUBURL || '');
   });
 
 });
