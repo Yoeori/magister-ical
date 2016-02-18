@@ -5,7 +5,14 @@ $('#url_form').submit(function() {
   $('#url_form :input').attr('disabled', true);
 
   //remove alert
-  $('#error').css({display: 'none'});
+  $('[data-formerror]').css({display: 'none'});
+
+  //check for empty values
+  if(!$('#school').val() || !$('#username').val() || !$('#password').val()) {
+    $('#error-fields').css({display: 'block'});
+    $('#url_form :input').attr('disabled', false);
+    return;
+  }
 
   //check the supplied credentials and if correct receive the encrypted version of the user's password
   $.post("./test", {
@@ -19,7 +26,7 @@ $('#url_form').submit(function() {
       $('#url').val(location.href.substring(0, location.href.lastIndexOf("/")+1) + $('#school').val() + "/" + $('#username').val() + "/" + response.password);
       $('#url-box').removeClass('invisible');
     } else {
-      $('#error').css({display: 'block'});
+      $('#error-connection').css({display: 'block'});
     }
 
     //re-enable the form

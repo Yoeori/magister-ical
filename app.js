@@ -103,9 +103,13 @@ class App {
    * @param  {Function} callback called with a boolean when the attempt to login has finished
    */
   checkCredentials(school, username, password, callback) {
-    new magister.Magister({school: school, username: username, password: password, keepLoggedIn: false}).ready(function(error) {
-      callback(error == null);
-    });
+    if(school && username && password) {
+      new magister.Magister({school: school, username: username, password: password, keepLoggedIn: false}).ready(function(error) {
+        callback(error == null);
+      });
+    } else {
+      callback(false);
+    }
   }
 
   /**

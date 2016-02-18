@@ -34,8 +34,11 @@
       <h1>Welkom bij de Magister Agenda naar iCal service!</h1>
       <p>Om deze service te gebruiken dien je je inloggegevens hieronder in te vullen. Je wachtwoord is beveiligd met AES beveiliging en wordt nooit opgeslagen.</p>
       <form id="url_form" action="javascript:void(0)" method="post">
-        <div id="error" class="alert alert-danger" style="display: none;" role="alert">
+        <div data-formerror id="error-connection" class="alert alert-danger" style="display: none;" role="alert">
           <strong>Oeps!</strong> Het lukte ons niet om verbinding te maken met jouw Magister account. Weet je zeker dat je je wachtwoord goed hebt ingevuld? Probeer het anders over een paar minuten nog eens.
+        </div>
+        <div data-formerror id="error-fields" class="alert alert-danger" style="display: none;" role="alert">
+          <strong>Oeps!</strong> Je moet alle velden hieronder invullen.
         </div>
         <fieldset class="form-group">
           <label for="school">School name</label>
