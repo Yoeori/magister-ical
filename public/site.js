@@ -40,3 +40,57 @@ $("#copy").click(function() {
   //return false to cancal all other default behaviour
   return false;
 });
+
+//school auto suggestions
+$('#school').on('input propertychange paste', function() {
+  //the current value of the school text input
+  var value = $(this).val();
+
+  //check if the length of text is larger or equel to 3
+  if(value.length >= 3) {
+
+    //perform ajax request
+    $.ajax("./schools?name="+value).then(function(data) {
+
+      //check if the suggestionbox should still update
+      if(value.length <= $('#school').val().length) {
+
+        //remove all current suggestions
+        $('#suggestions').empty();
+
+        //add current suggestions
+        var hasadded = false;
+        for(var i = 0; i < 5 && i < data.schools.length; i++) {
+          var url = data.schools[i].url.replace('https://', '').replace('.magister.net', '');
+          if(url != value) {
+            $('#suggestions').append('<div class="school" data-value="'+url+'">'+data.schools[i].name+'</div>');
+            hasadded = true;
+          }
+        }
+
+        //add click functionality for all current suggestions
+        $('.school[data-value]').click(function() {
+          $('#school').val($(this).attr('data-value'));
+          $('#suggestions').empty();
+          $('#suggestions').addClass('invisible');
+          $('#school').removeClass('suggesting');
+        });
+
+        //make suggestionbox visible if needed otherwise make it invisible
+        if(hasadded) {
+          $('#suggestions').removeClass('invisible');
+          $('#school').addClass('suggesting');
+        } else {
+          $('#suggestions').addClass('invisible');
+          $('#school').removeClass('suggesting');
+          $('#suggestions').empty();
+        }
+      }
+    });
+  } else {
+    //empty the suggestionbox
+    $('#suggestions').addClass('invisible');
+    $('#school').removeClass('suggesting');
+    $('#suggestions').empty();
+  }
+});

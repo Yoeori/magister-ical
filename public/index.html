@@ -6,6 +6,27 @@
     <title>Magister 6 iCal service</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <style>
+      .suggesting {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      .suggestions {
+        width: 100%;
+        border: 1px solid #ccc;
+        border-top: 0;
+        border-bottom-left-radius: .25rem;
+        border-bottom-right-radius: .25rem;
+      }
+      .suggestions > .school {
+        padding: 5px 10px;
+        width: 100%;
+      }
+      .suggestions > .school:hover {
+        background: #eee;
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -18,13 +39,14 @@
         </div>
         <fieldset class="form-group">
           <label for="school">School name</label>
-          <input type="text" class="form-control" id="school" placeholder="corderius">
+          <input type="text" class="form-control" id="school" autocomplete="off" placeholder="corderius">
+          <div class="suggestions invisible" id="suggestions"></div>
           <small class="text-muted">De naam van je school. Deze kun je vinden in de url van Magister: <b>corderius</b>.magister.net.</small>
         </fieldset>
         <fieldset class="form-group">
           <label for="username">Username</label>
           <input type="text" class="form-control" id="username" placeholder="127753">
-          <small class="text-muted">Bijvoorbeeld je scholierennummer.</small>
+          <small class="text-muted">Bijvoorbeeld je leerlingennummer.</small>
         </fieldset>
         <fieldset class="form-group">
           <label for="password">Password</label>

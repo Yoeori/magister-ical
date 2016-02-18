@@ -146,6 +146,26 @@ class App {
 
   }
 
+  /**
+   * Returns list of schools containing the query
+   * @param  {String}   query    the query that will be searched for
+   * @param  {Function} callback called when the results are loaded
+   */
+  getListOfSchools(query, callback) {
+    if(query.length < 3) {
+      callback({schools: []});
+      return;
+    }
+    magister.MagisterSchool.getSchools(query, function(error, result) {
+      if(error != null) {
+        console.error('Something went wrong while loading the school list: ' + error);
+        callback({error: true, message: 'something went wrong while loading the school list', schools: []});
+      } else {
+        callback({schools: result});
+      }
+    })
+  }
+
 }
 
 //export the class

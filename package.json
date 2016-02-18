@@ -1,14 +1,14 @@
 {
   "name": "magister-ical",
-  "description": "",
-  "version": "0.1.0",
-  "main": "index.js",
+  "description": "Service for making your Magister calendar available as an iCal file.",
+  "version": "0.2.0",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git@yoeori.nl:yoeori/ical-test.git"
+    "url": "git@github.com:Yoeori/magister-ical.git"
   },
   "author": "Yoeri Otten <yoeori@live.nl>",
   "license": "MIT",
@@ -16,8 +16,6 @@
     "body-parser": "^1.14.2",
     "cron": "^1.0.9",
     "express": "^4.13.3",
-    "google-auth-library": "^0.9.6",
-    "googleapis": "^2.1.6",
     "ical-generator": "^0.2.3",
     "magister.js": "^1.11.0",
     "node-cryptojs-aes": "^0.4.0"

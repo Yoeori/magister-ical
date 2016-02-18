@@ -52,6 +52,13 @@ var app = new App(require("./secrets"), require("./data"), function() {
     });
   });
 
+  //get list of schools matching query
+  router.get('/schools', function(req, res) {
+    app.getListOfSchools(req.query.name || '', function(result) {
+      res.json(result);
+    });
+  });
+
   //add the router to the server
   server.use(process.env.NODE_SUBURL || '', router);
 
