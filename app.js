@@ -52,7 +52,7 @@ class App {
     var self = this;
 
     var user = new User(this, data.school, data.username, this.decryptText(data.password), function() {
-      if(!user.hasLoggedIn) {
+      if(!user || !user.hasLoggedIn) {
         callback(false)
       } else {
         self.users.push(user);
